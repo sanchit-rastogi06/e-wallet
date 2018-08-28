@@ -1,15 +1,14 @@
 class PerformTransaction
-	def initialize(amount:, transaction_type:, receiver_wallet_id:, sender:)
+	def initialize(amount:, transaction_type:, receiver_wallet:, sender:)
 		@amount = amount
 		@transaction_type = transaction_type
-		@receiver_wallet_id = receiver_wallet_id
-		@receiver_wallet = Wallet.where(id: @receiver_wallet_id).first
+		@receiver_wallet = receiver_wallet
 		@sender_wallet = sender.wallet
 	end
 
 	def execute!
 		ActiveRecord::Base.transaction do
-			WalletTransaction.create!(receiver_wallet_id: @receiver_wallet_id, sender_wallet_id: @sender_wallet.id,
+			WalletTransaction.create!(receiver_wallet_id: @receiver_wallet.id, sender_wallet_id: @sender_wallet.id,
 									amount: @amount, transaction_type: @transaction_type)
 
 			if @transaction_type == "withdraw"

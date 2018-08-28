@@ -1,9 +1,8 @@
 class ValidateNewTransaction
-	def initialize(amount:, transaction_type:, receiver_wallet_id:)
+	def initialize(amount:, transaction_type:, receiver_wallet:)
 		@amount = amount
 		@transaction_type = transaction_type
-		@receiver_wallet_id = receiver_wallet_id
-		@receiver_wallet = Wallet.where(id: @receiver_wallet_id).first
+		@receiver_wallet = receiver_wallet
 		@errors = []
 	end
 
@@ -17,7 +16,7 @@ class ValidateNewTransaction
 
 	private
 		def validate_existance_of_wallet!
-			@errors << "Wallet not found" if @receiver_wallet.blank?
+			@errors << "Wallet not found" if @receiver_wallet.nil?
 		end
 
 		def validate_withdrawal!

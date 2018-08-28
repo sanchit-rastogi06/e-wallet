@@ -3,7 +3,7 @@ class AuthenticationController < ApplicationController
 	skip_before_action :authenticate_request!, only: [:create]
 
 	def show
-		user = User.where(id: params[:id]).first
+		user = User.find_by(id: params[:id])
 		if !user.nil?
 			render json: { email: user.email, balance: Wallet.where(user_id: user.id).first.INR }, status: :ok
 		else
