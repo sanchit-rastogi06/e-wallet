@@ -16,7 +16,7 @@ class ApplicationController < ActionController::API
 		end
 
 		def invalid_authentication
-			raise "Authentication Failed"
+			raise CustomError.new "Authentication Failed"
 			#return render json: { error: 'Authentication Failed' }, status: :unauthorized
 		end
 

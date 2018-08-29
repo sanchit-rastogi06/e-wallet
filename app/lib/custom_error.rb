@@ -1,3 +1,3 @@
 class CustomError < StandardError
-
+	
 end
