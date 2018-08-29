@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::API
 
 	before_action :authenticate_request!
+	include GlobalErrorHandler
 
 	protected
 
@@ -16,8 +17,7 @@ class ApplicationController < ActionController::API
 		end
 
 		def invalid_authentication
-			raise CustomError.new "Authentication Failed"
-			#return render json: { error: 'Authentication Failed' }, status: :unauthorized
+			raise CustomAuthError.new "Authentication Failed"
 		end
 
 	private

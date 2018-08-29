@@ -16,13 +16,13 @@ class ExecuteTransaction
 	def validate_transaction!
 
 		if @receiver_wallet.nil?
-			raise "Wallet not found"
+			raise CustomError.new "Wallet not found"
 		end
 		if (@transaction_type == "withdraw" || @transaction_type == "transfer") && @receiver_wallet.INR - @amount < 0 
-			raise "Insufficient wallet balance"
+			raise CustomError.new "Insufficient wallet balance"
 		end
 		if !user_authorized?(@transaction_type, @receiver_wallet.user_id)
-			raise "Unauthorized"
+			raise CustomAuthError.new "Unauthorized"
 		end
 
 	end
@@ -43,7 +43,7 @@ class ExecuteTransaction
 			@receiver_wallet
 
 		rescue 
-			raise "Transacation cannot be processed" 
+			raise CustomError.new "Transacation cannot be processed" 
 		end
 	end
 

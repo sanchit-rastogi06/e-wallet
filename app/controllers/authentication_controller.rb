@@ -7,7 +7,7 @@ class AuthenticationController < ApplicationController
 		if !user.nil?
 			render json: { email: user.email, balance: user.wallet.INR }, status: :ok
 		else
-			render json: { error: 'Invalid request' }, status: :bad_request
+			raise CustomError.new "Invalid request"
 		end
 	end
 
