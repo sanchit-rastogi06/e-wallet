@@ -17,7 +17,7 @@ class AuthenticationController < ApplicationController
 			jwt = JsonWebToken.encode({ user_id: user.id })
 			render json: { jwt: jwt }, status: :ok
 		else
-			render json: { error: 'Invalid email/password/otp' }, status: :unauthorized
+			raise CustomAuthError.new 'Invalid email/password/otp' 
 		end
 	end
 
