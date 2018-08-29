@@ -16,7 +16,8 @@ class ApplicationController < ActionController::API
 		end
 
 		def invalid_authentication
-			render json: { error: 'Invalid Request' }, status: :unauthorized
+			raise "Authentication Failed"
+			#return render json: { error: 'Authentication Failed' }, status: :unauthorized
 		end
 
 	private

@@ -3,4 +3,5 @@ class Wallet < ApplicationRecord
 
   validates :user_id, presence: true
   validates :INR, presence: true, numericality: true
+  
 end

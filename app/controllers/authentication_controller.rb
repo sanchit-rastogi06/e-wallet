@@ -5,7 +5,7 @@ class AuthenticationController < ApplicationController
 	def show
 		user = User.find_by(id: params[:id])
 		if !user.nil?
-			render json: { email: user.email, balance: Wallet.where(user_id: user.id).first.INR }, status: :ok
+			render json: { email: user.email, balance: user.wallet.INR }, status: :ok
 		else
 			render json: { error: 'Invalid request' }, status: :bad_request
 		end
