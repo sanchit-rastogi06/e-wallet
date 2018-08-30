@@ -50,13 +50,8 @@ class ExecuteTransaction
 	private
 
 		def user_authorized?(type, receiver_id)
-			if type == "transfer"
-				true
-			elsif (type == "deposit" || type == "withdraw") && ( @sender.id != receiver_id )
-				false
-			else
-				true
-			end
+			return false if (type == "deposit" || type == "withdraw") && ( @sender.id != receiver_id )
+			true
 		end  
 end
 
